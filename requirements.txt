@@ -14,3 +14,5 @@ together
 langchain-together
 langchain_community
 langchain-chroma
+langchain_pinecone
+pinecone-client

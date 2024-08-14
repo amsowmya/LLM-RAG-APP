@@ -6,6 +6,8 @@ from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from dotenv import load_dotenv
 import os 
 
+load_dotenv()
+
 class RAG:
     def __init__(self) -> None:
         self.pdf_folder_path = os.getenv("SOURCE_DATA")
@@ -52,14 +54,17 @@ class RAG:
             db = Chroma.from_documents(self.documents,
                                     embedding = self.emb_model,
                                     persist_directory=self.vector_store_path)
-            
             db.persist()
+            
         except Exception as e:
             print(e)
         
-    def load_vector_db(self) -> Chroma:
+    def load_vector_db(self):
         try:
-            db = Chroma(persist_directory=self.vector_store_path, 
+            # db = Chroma(persist_directory=self.vector_store_path, 
+            #             embedding_function=self.emb_model
+            #             )
+            db = Chroma(persist_directory="E:\\2024\\GenerativeAI\\Langchain\\Projects\\LLM-RAG-APP\\vectorstore\\", 
                         embedding_function=self.emb_model
                         )
             return db
